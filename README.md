@@ -6,7 +6,7 @@ This project simulates a real-world seafood marketplace where users can explore 
 
 ## 🚀 Live Demo
 
-https://your-demo-link-here
+[https://your-demo-link-here](https://alithomx.github.io/modern-seafood-ecommerce/)
 
 ---
 
