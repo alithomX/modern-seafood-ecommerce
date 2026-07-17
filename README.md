@@ -67,11 +67,6 @@ This project simulates a real-world seafood marketplace where users can explore 
 
 ---
 
-## 📸 Screenshots
-
-(Add screenshots here)
-
----
 
 ## 🎯 Project Goals
 
