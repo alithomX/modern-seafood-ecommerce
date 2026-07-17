@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود | ثبت‌نام — خلیج تازه</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config={theme:{extend:{colors:{coral:'#E8734A','coral-dark':'#D4602E','teal-dark':'#0F4C5C','teal-mid':'#1A6B7F',gold:'#C9A15C','gold-light':'#D4B87A',sand:'#FAF6F0','sand-dark':'#EDE7DB','deep-blue':'#073B4C','deep-blue-light':'#0A4F66'},fontFamily:{vazir:['Vazirmatn','sans-serif']}}}}}
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Vazirmatn',sans-serif;background:#FAF6F0;color:#1a1a1a;overflow-x:hidden;min-height:100vh}
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#FAF6F0}::-webkit-scrollbar-thumb{background:#0F4C5C;border-radius:10px}
+
+        .auth-bg{position:fixed;inset:0;z-index:0}
+        .auth-bg img{width:100%;height:100%;object-cover}
+        .auth-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,115,74,.88) 0%,rgba(140,50,160,.75) 40%,rgba(7,59,76,.92) 100%)}
+
+        .auth-card{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.3)}
+        .auth-input{width:100%;border:1.5px solid #e5e7eb;border-radius:14px;padding:14px 18px;font-size:14px;font-family:'Vazirmatn',sans-serif;background:#fff;transition:all .25s ease;outline:none;color:#1a1a1a}
+        .auth-input:focus{border-color:#0F4C5C;box-shadow:0 0 0 4px rgba(15,76,92,.08)}
+        .auth-input::placeholder{color:#9ca3af}
+        .auth-input.error{border-color:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,.08)}
+        .error-msg{color:#ef4444;font-size:11px;margin-top:5px;display:none;align-items:center;gap:4px}
+        .error-msg.show{display:flex}
+
+        .auth-btn{background:linear-gradient(135deg,#073B4C,#0F4C5C);transition:all .3s ease;color:#fff}
+        .auth-btn:hover{background:linear-gradient(135deg,#E8734A,#D4602E);transform:translateY(-1px);box-shadow:0 8px 25px rgba(232,115,74,.35)}
+        .auth-btn:active{transform:translateY(0)}
+        .auth-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+        .tab-btn{position:relative;transition:all .3s ease;color:#9ca3af;font-weight:600}
+        .tab-btn.active{color:#073B4C}
+        .tab-btn.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,#E8734A,#C9A15C);border-radius:3px}
+
+        .social-btn{transition:all .2s ease;border:1.5px solid #e5e7eb}
+        .social-btn:hover{border-color:#C9A15C;background:#fffbf5;transform:translateY(-1px)}
+
+        .otp-input{width:48px;height:56px;text-align:center;font-size:20px;font-weight:700;border:1.5px solid #e5e7eb;border-radius:14px;transition:all .2s ease;outline:none;color:#073B4C;background:#fff}
+        .otp-input:focus{border-color:#0F4C5C;box-shadow:0 0 0 4px rgba(15,76,92,.08)}
+
+        .divider{display:flex;align-items:center;gap:12px;color:#9ca3af;font-size:12px}
+        .divider::before,.divider::after{content:'';flex:1;height:1px;background:#e5e7eb}
+
+        .back-link{transition:all .2s ease}
+        .back-link:hover{color:#E8734A}
+
+        .checkbox-wrap{cursor:pointer;display:flex;align-items:center;gap:8px}
+        .checkbox-wrap input{display:none}
+        .check-box{width:20px;height:20px;border:2px solid #d1d5db;border-radius:6px;transition:all .2s ease;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .checkbox-wrap input:checked + .check-box{background:#0F4C5C;border-color:#0F4C5C}
+        .checkbox-wrap input:checked + .check-box i{opacity:1}
+        .check-box i{opacity:0;color:#fff;font-size:10px;transition:opacity .2s}
+
+        .wave-wrap{position:absolute;bottom:-2px;left:0;width:100%;overflow:hidden;line-height:0}
+        .wave-wrap svg{width:200%;min-width:1400px}
+        .wave1 svg{animation:waveMove 7s linear infinite}
+        @keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+        .reveal.revealed{opacity:1;transform:translateY(0)}
+
+        .password-toggle{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9ca3af;cursor:pointer;transition:color .2s}
+        .password-toggle:hover{color:#0F4C5C}
+
+        .strength-bar{height:4px;border-radius:4px;transition:all .3s ease}
+        .strength-weak{background:#ef4444;width:33%}
+        .strength-medium{background:#f59e0b;width:66%}
+        .strength-strong{background:#22c55e;width:100%}
+
+        /* Floating label */
+        .float-label{position:relative}
+        .float-label input{padding:18px 16px 6px 16px}
+        .float-label label{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:14px;transition:all .2s ease;pointer-events:none;background:#fff;padding:0 4px}
+        .float-label input:focus + label,.float-label input:not(:placeholder-shown) + label{top:0;transform:translateY(-50%) scale(.85);color:#0F4C5C;font-weight:600}
+        .float-label input.error + label{color:#ef4444}
+
+        @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+        .shake{animation:shake .4s ease}
+
+        @keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 rgba(232,115,74,.3)}50%{box-shadow:0 0 0 8px rgba(232,115,74,0)}}
+        .pulse-glow{animation:pulse-glow 2s ease-in-out infinite}
+
+        .toast-enter{animation:toastIn .4s ease forwards}
+        .toast-exit{animation:toastOut .3s ease forwards}
+        @keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes toastOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-10px) scale(.95)}}
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body class="font-vazir">
+
+<!-- Background -->
+<div class="auth-bg">
+    <img src="https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/b239502332a537631ca4d042f3c32eb9f17893fa.jpg" alt="">
+</div>
+
+<!-- Wave bottom -->
+<div class="wave-wrap wave1" style="z-index:1;bottom:-1px">
+    <svg viewBox="0 0 2880 120" preserveAspectRatio="none" style="height:50px">
+        <path d="M0,70 C180,30 360,90 540,50 C720,10 900,80 1080,50 C1260,20 1440,80 1620,50 C1800,20 1980,80 2160,50 C2340,20 2520,80 2700,50 C2880,20 2880,50 2880,50 L2880,120 L0,120 Z" fill="#FAF6F0"/>
+    </svg>
+</div>
+
+<!-- Main Container -->
+<div class="relative z-10 min-h-screen flex items-center justify-center px-4 py-8">
+    <div class="w-full max-w-md">
+
+        <!-- Back to home -->
+        <div class="mb-6 reveal">
+            <a href="index.html" class="back-link inline-flex items-center gap-2 text-white/80 text-sm font-medium hover:text-white">
+                <i class="fa-solid fa-arrow-right"></i>
+                <span>بازگشت به فروشگاه</span>
+            </a>
+        </div>
+
+        <!-- Logo -->
+        <div class="text-center mb-6 reveal">
+            <a href="index.html" class="inline-flex items-center gap-3">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-coral to-gold flex items-center justify-center shadow-lg shadow-coral/30 pulse-glow">
+                    <i class="fa-solid fa-fish text-white text-xl"></i>
+                </div>
+                <div class="text-left">
+                    <span class="text-white text-xl font-black block leading-tight">خلیج تازه</span>
+                    <span class="text-white/60 text-xs block">بندرعباس · خلیج فارس</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Demo Credentials Hint -->
+        <div class="mb-6 reveal">
+            <div class="bg-white/15 backdrop-blur-md border border-white/20 rounded-2xl p-4 text-white">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-circle-info text-gold"></i>
+                    <span class="text-sm font-bold">راهنمای ورود نمونه</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-white/80">
+                    <div class="flex items-center gap-2">
+                        <span class="text-white/50">📱 شماره:</span>
+                        <code class="bg-white/10 px-2 py-0.5 rounded font-mono text-gold font-bold select-all">09123456789</code>
+                        <button onclick="fillDemo('09123456789','123456789')" class="text-coral hover:text-white text-[10px] font-bold underline mr-auto">پر کردن خودکار</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-white/50">🔑 رمز:</span>
+                        <code class="bg-white/10 px-2 py-0.5 rounded font-mono text-gold font-bold select-all">123456789</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Card -->
+        <div class="auth-card rounded-3xl shadow-2xl overflow-hidden reveal">
+
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-100">
+                <button onclick="switchTab('login')" id="tab-login" class="tab-btn active flex-1 py-4 text-sm">
+                    <i class="fa-solid fa-right-to-bracket ml-1.5"></i>ورود
+                </button>
+                <button onclick="switchTab('register')" id="tab-register" class="tab-btn flex-1 py-4 text-sm">
+                    <i class="fa-solid fa-user-plus ml-1.5"></i>ثبت‌نام
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="form-login" class="p-6 md:p-8">
+                <h2 class="text-deep-blue font-black text-lg mb-1">خوش اومدی! 👋</h2>
+                <p class="text-gray-400 text-xs mb-6">برای ادامه شماره موبایلت رو وارد کن</p>
+
+                <form onsubmit="event.preventDefault();handleLogin();">
+                    <!-- Phone -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">شماره موبایل</label>
+                        <div class="relative">
+                            <input id="login-phone" type="tel" class="auth-input pl-12" placeholder="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11" oninput="validatePhone(this)">
+                            <!-- <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">🇮🇷 +۹۸</span> -->
+                        </div>
+                        <div class="error-msg" id="err-login-phone"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>شماره موبایل ۱۱ رقم وارد کنید</div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">رمز عبور</label>
+                        <div class="relative">
+                            <input id="login-password" type="password" class="auth-input pl-12" placeholder="رمز عبورت رو وارد کن">
+                            <span class="password-toggle" onclick="togglePassword('login-password',this)">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </div>
+                        <div class="error-msg" id="err-login-password"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>رمز عبور را وارد کنید</div>
+                    </div>
+
+                    <!-- Remember & Forgot -->
+                    <div class="flex items-center justify-between mb-6">
+                        <label class="checkbox-wrap text-xs text-gray-500">
+                            <input type="checkbox" id="login-remember">
+                            <span class="check-box"><i class="fa-solid fa-check"></i></span>
+                            <span>مرا به خاطر بسپار</span>
+                        </label>
+                        <button type="button" onclick="showForgotModal()" class="text-coral text-xs font-bold hover:text-coral-dark transition-colors">فراموشی رمز؟</button>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" id="btn-login" class="auth-btn w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                        <span>ورود به حساب</span>
+                        <i class="fa-solid fa-arrow-left text-xs"></i>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="divider my-6">
+                    <span>یا ورود با</span>
+                </div>
+
+                <!-- Social Login -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="socialLogin('google')" class="social-btn flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-gray-600">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="">
+                        <span>گوگل</span>
+                    </button>
+                    <button onclick="socialLogin('apple')" class="social-btn flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-gray-600">
+                        <i class="fa-brands fa-apple text-lg"></i>
+                        <span>اپل</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Register Form (hidden by default) -->
+            <div id="form-register" class="p-6 md:p-8 hidden">
+                <h2 class="text-deep-blue font-black text-lg mb-1">حساب جدید بساز! 🎉</h2>
+                <p class="text-gray-400 text-xs mb-6">تازه‌ترین ماهی‌ها منتظر تو هستن</p>
+
+                <form onsubmit="event.preventDefault();handleRegister();">
+                    <!-- Name -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">نام و نام خانوادگی <span class="text-coral">*</span></label>
+                        <input id="reg-name" type="text" class="auth-input" placeholder="مثلاً: علی محمدی">
+                        <div class="error-msg" id="err-reg-name"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>نام خود را وارد کنید</div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">شماره موبایل <span class="text-coral">*</span></label>
+                        <div class="relative">
+                            <input id="reg-phone" type="tel" class="auth-input pl-12" placeholder="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11" oninput="validatePhone(this)">
+                            <!-- <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">🇮🇷 +۹۸</span> -->
+                        </div>
+                        <div class="error-msg" id="err-reg-phone"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>شماره موبایل ۱۱ رقم وارد کنید</div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-2">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">رمز عبور <span class="text-coral">*</span></label>
+                        <div class="relative">
+                            <input id="reg-password" type="password" class="auth-input pl-12" placeholder="حداقل ۸ کاراکتر" oninput="checkStrength(this.value)">
+                            <span class="password-toggle" onclick="togglePassword('reg-password',this)">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </div>
+                        <div class="error-msg" id="err-reg-password"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>رمز عبور حداقل ۸ کاراکتر باشد</div>
+                        <!-- Strength bar -->
+                        <div class="mt-2 h-1 bg-gray-100 rounded-full overflow-hidden">
+                            <div id="strength-bar" class="strength-bar"></div>
+                        </div>
+                        <p id="strength-text" class="text-[10px] text-gray-400 mt-1"></p>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="mb-6">
+                        <label class="checkbox-wrap text-xs text-gray-500 leading-relaxed">
+                            <input type="checkbox" id="reg-terms">
+                            <span class="check-box"><i class="fa-solid fa-check"></i></span>
+                            <span><a href="#" class="text-coral font-bold hover:underline">قوانین و مقررات</a> رو خوندم و می‌پذیرم</span>
+                        </label>
+                        <div class="error-msg" id="err-reg-terms"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>پذیرش قوانین الزامی است</div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" id="btn-register" class="auth-btn w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                        <span>ثبت‌نام</span>
+                        <i class="fa-solid fa-arrow-left text-xs"></i>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="divider my-6">
+                    <span>یا ثبت‌نام با</span>
+                </div>
+
+                <!-- Social Register -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="socialLogin('google')" class="social-btn flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-gray-600">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="">
+                        <span>گوگل</span>
+                    </button>
+                    <button onclick="socialLogin('apple')" class="social-btn flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-gray-600">
+                        <i class="fa-brands fa-apple text-lg"></i>
+                        <span>اپل</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- OTP Form (hidden, shown after phone submit) -->
+            <div id="form-otp" class="p-6 md:p-8 hidden">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 rounded-full bg-sky-50 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-mobile-screen-button text-sky-500 text-2xl"></i>
+                    </div>
+                    <h2 class="text-deep-blue font-black text-lg mb-1">کد تأیید رو وارد کن</h2>
+                    <p class="text-gray-400 text-xs">کد ۴ رقمی به <span id="otp-phone-display" class="text-deep-blue font-bold dir-ltr inline-block">۰۹۱۲×××۵۶۷۸</span> ارسال شد</p>
+                </div>
+
+                <form onsubmit="event.preventDefault();handleOTP();">
+                    <div class="flex justify-center gap-3 mb-6" dir="ltr">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="moveOTP(this,1)" onkeydown="backOTP(event,this,0)">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="moveOTP(this,2)" onkeydown="backOTP(event,this,0)">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="moveOTP(this,3)" onkeydown="backOTP(event,this,1)">
+                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric" oninput="moveOTP(this,4)" onkeydown="backOTP(event,this,2)">
+                    </div>
+
+                    <div class="error-msg justify-center mb-4" id="err-otp"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>کد تأیید نامعتبر است</div>
+
+                    <button type="submit" id="btn-otp" class="auth-btn w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 mb-4">
+                        <span>تأیید و ورود</span>
+                        <i class="fa-solid fa-arrow-left text-xs"></i>
+                    </button>
+
+                    <div class="text-center">
+                        <button type="button" onclick="resendOTP()" id="btn-resend" class="text-coral text-xs font-bold hover:text-coral-dark transition-colors disabled:text-gray-300" disabled>
+                            ارسال مجدد (<span id="otp-timer">۶۰</span>)
+                        </button>
+                    </div>
+                </form>
+
+                <button onclick="backFromOTP()" class="w-full mt-4 text-gray-400 text-xs font-medium hover:text-deep-blue transition-colors flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>تغییر شماره موبایل</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Footer text -->
+        <p class="text-center text-white/50 text-xs mt-6 reveal">
+            با ورود، <a href="#" class="text-white/70 hover:text-white underline">قوانین حریم خصوصی</a> رو می‌پذیری
+        </p>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgot-modal" class="fixed inset-0 z-50 bg-black/50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 md:p-8 w-full max-w-sm shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="forgot-content">
+        <div class="text-center mb-6">
+            <div class="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-3">
+                <i class="fa-solid fa-key text-coral text-xl"></i>
+            </div>
+            <h3 class="font-black text-deep-blue text-lg">بازیابی رمز عبور</h3>
+            <p class="text-gray-400 text-xs mt-1">شماره موبایلت رو وارد کن تا لینک بازیابی برات بفرستیم</p>
+        </div>
+        <form onsubmit="event.preventDefault();handleForgot();">
+            <div class="mb-4">
+                <input id="forgot-phone" type="tel" class="auth-input" placeholder="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11">
+                <div class="error-msg" id="err-forgot-phone"><i class="fa-solid fa-circle-exclamation text-[10px]"></i>شماره موبایل نامعتبر</div>
+            </div>
+            <button type="submit" class="auth-btn w-full py-3 rounded-xl font-bold text-sm mb-3">ارسال لینک بازیابی</button>
+            <button type="button" onclick="closeForgotModal()" class="w-full py-3 rounded-xl font-bold text-sm text-gray-500 hover:bg-gray-50 transition-colors">انصراف</button>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 items-center pointer-events-none"></div>
+
+<script>
+let currentTab = 'login';
+let otpTimer = null;
+let previousForm = 'login';
+
+function toFa(n){const d=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];return String(n).replace(/\d/g,c=>d[c]);}
+
+function showToast(msg,type='success'){
+    const c=document.getElementById('toast-container'),t=document.createElement('div');
+    const co={success:'bg-deep-blue',info:'bg-gray-700',error:'bg-red-600'};
+    const ic={success:'fa-check-circle text-green-400',info:'fa-info-circle text-sky-400',error:'fa-exclamation-circle text-red-300'};
+    t.className=`toast-enter ${co[type]} text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm pointer-events-auto`;
+    t.innerHTML=`<i class="fa-solid ${ic[type]}"></i><span>${msg}</span>`;
+    c.appendChild(t);
+    setTimeout(()=>{t.classList.remove('toast-enter');t.classList.add('toast-exit');},2500);
+    setTimeout(()=>t.remove(),2900);
+}
+
+function switchTab(tab){
+    currentTab = tab;
+    document.getElementById('tab-login').classList.toggle('active',tab==='login');
+    document.getElementById('tab-register').classList.toggle('active',tab==='register');
+    document.getElementById('form-login').classList.toggle('hidden',tab!=='login');
+    document.getElementById('form-register').classList.toggle('hidden',tab!=='register');
+    clearErrors();
+}
+
+function clearErrors(){
+    document.querySelectorAll('.auth-input').forEach(el=>el.classList.remove('error'));
+    document.querySelectorAll('.error-msg').forEach(el=>el.classList.remove('show'));
+}
+
+function showError(id,show=true){
+    const el=document.getElementById(id);
+    if(!el)return;
+    const inputId=id.replace('err-','');
+    const input=document.getElementById(inputId);
+    if(input)input.classList.toggle('error',show);
+    el.classList.toggle('show',show);
+}
+
+function validatePhone(input){
+    input.value=input.value.replace(/[^0-9]/g,'');
+    if(input.value.length>0&&!input.value.startsWith('0'))input.value='0'+input.value;
+}
+
+function togglePassword(id,toggle){
+    const input=document.getElementById(id);
+    const icon=toggle.querySelector('i');
+    if(input.type==='password'){input.type='text';icon.classList.replace('fa-eye','fa-eye-slash');}
+    else{input.type='password';icon.classList.replace('fa-eye-slash','fa-eye');}
+}
+
+function checkStrength(val){
+    const bar=document.getElementById('strength-bar');
+    const text=document.getElementById('strength-text');
+    let score=0;
+    if(val.length>=8)score++;
+    if(/[A-Z]/.test(val))score++;
+    if(/[0-9]/.test(val))score++;
+    if(/[^A-Za-z0-9]/.test(val))score++;
+
+    bar.className='strength-bar';
+    if(val.length===0){text.textContent='';return;}
+    if(score<=1){bar.classList.add('strength-weak');text.textContent='ضعیف';text.className='text-[10px] text-red-500 mt-1';}
+    else if(score<=2){bar.classList.add('strength-medium');text.textContent='متوسط';text.className='text-[10px] text-amber-500 mt-1';}
+    else{bar.classList.add('strength-strong');text.textContent='قوی';text.className='text-[10px] text-green-500 mt-1';}
+}
+
+function handleLogin(){
+    clearErrors();
+    let ok=true;
+    const phone=document.getElementById('login-phone').value.trim();
+    const pass=document.getElementById('login-password').value;
+
+    if(!phone||phone.length!==11||!phone.startsWith('09')){showError('err-login-phone');ok=false;}
+    if(!pass||pass.length<1){showError('err-login-password');ok=false;}
+
+    if(!ok){
+        document.getElementById('btn-login').classList.add('shake');
+        setTimeout(()=>document.getElementById('btn-login').classList.remove('shake'),400);
+        return;
+    }
+
+    // Check demo credentials
+    if(phone==='09123456789' && pass==='123456789'){
+        showToast('ورود با موفقیت انجام شد!','success');
+        localStorage.setItem('khalijtaze_user', JSON.stringify({phone: phone, name: 'کاربر نمونه'}));
+        const redirect = localStorage.getItem('khalijtaze_redirect') || 'index.html';
+        localStorage.removeItem('khalijtaze_redirect');
+        setTimeout(()=>window.location.href=redirect, 800);
+        return;
+    }
+
+    // For other credentials, show OTP
+    showOTPForm(phone,'login');
+}
+
+function handleRegister(){
+    clearErrors();
+    let ok=true;
+    const name=document.getElementById('reg-name').value.trim();
+    const phone=document.getElementById('reg-phone').value.trim();
+    const pass=document.getElementById('reg-password').value;
+    const terms=document.getElementById('reg-terms').checked;
+
+    if(!name||name.length<2){showError('err-reg-name');ok=false;}
+    if(!phone||phone.length!==11||!phone.startsWith('09')){showError('err-reg-phone');ok=false;}
+    if(!pass||pass.length<8){showError('err-reg-password');ok=false;}
+    if(!terms){showError('err-reg-terms');ok=false;}
+
+    if(!ok){
+        document.getElementById('btn-register').classList.add('shake');
+        setTimeout(()=>document.getElementById('btn-register').classList.remove('shake'),400);
+        return;
+    }
+
+    // Auto-login for demo
+    if(phone==='09123456789' && pass==='123456789'){
+        showToast('ثبت‌نام و ورود با موفقیت انجام شد!','success');
+        localStorage.setItem('khalijtaze_user', JSON.stringify({phone: phone, name: name}));
+        const redirect = localStorage.getItem('khalijtaze_redirect') || 'index.html';
+        localStorage.removeItem('khalijtaze_redirect');
+        setTimeout(()=>window.location.href=redirect, 800);
+        return;
+    }
+
+    showOTPForm(phone,'register');
+}
+
+function showOTPForm(phone,from){
+    previousForm = from;
+    document.getElementById('form-login').classList.add('hidden');
+    document.getElementById('form-register').classList.add('hidden');
+    document.getElementById('form-otp').classList.remove('hidden');
+    document.getElementById('tab-login').classList.remove('active');
+    document.getElementById('tab-register').classList.remove('active');
+
+    // Mask phone
+    const masked=phone.substring(0,4)+'×××'+phone.substring(7);
+    document.getElementById('otp-phone-display').textContent=toFa(masked);
+
+    // Focus first OTP input
+    setTimeout(()=>document.querySelector('.otp-input').focus(),100);
+
+    // Start timer
+    startOTPTimer();
+}
+
+function backFromOTP(){
+    document.getElementById('form-otp').classList.add('hidden');
+    if(previousForm==='login'){
+        document.getElementById('form-login').classList.remove('hidden');
+        document.getElementById('tab-login').classList.add('active');
+    }else{
+        document.getElementById('form-register').classList.remove('hidden');
+        document.getElementById('tab-register').classList.add('active');
+    }
+    clearOTPTimer();
+    document.querySelectorAll('.otp-input').forEach(i=>i.value='');
+    document.getElementById('err-otp').classList.remove('show');
+}
+
+function moveOTP(input,nextIdx){
+    input.value=input.value.replace(/[^0-9]/g,'');
+    if(input.value&&nextIdx<4){
+        const inputs=document.querySelectorAll('.otp-input');
+        if(inputs[nextIdx])inputs[nextIdx].focus();
+    }
+}
+
+function backOTP(e,input,prevIdx){
+    if(e.key==='Backspace'&&!input.value){
+        const inputs=document.querySelectorAll('.otp-input');
+        if(inputs[prevIdx])inputs[prevIdx].focus();
+    }
+}
+
+function handleOTP(){
+    const inputs=document.querySelectorAll('.otp-input');
+    const code=Array.from(inputs).map(i=>i.value).join('');
+
+    if(code.length!==4){showError('err-otp');return;}
+
+    // Simulate verification
+    document.getElementById('btn-otp').disabled=true;
+    document.getElementById('btn-otp').innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> در حال بررسی...';
+
+    setTimeout(()=>{
+        showToast('ورود با موفقیت انجام شد!','success');
+        localStorage.setItem('khalijtaze_user', JSON.stringify({phone: '09123456789', name: 'کاربر نمونه'}));
+        const redirect = localStorage.getItem('khalijtaze_redirect') || 'index.html';
+        localStorage.removeItem('khalijtaze_redirect');
+        setTimeout(()=>window.location.href=redirect, 800);
+    },1500);
+}
+
+function startOTPTimer(){
+    let sec=60;
+    const btn=document.getElementById('btn-resend');
+    const timerEl=document.getElementById('otp-timer');
+    btn.disabled=true;
+
+    clearOTPTimer();
+    otpTimer=setInterval(()=>{
+        sec--;
+        timerEl.textContent=toFa(sec);
+        if(sec<=0){
+            clearOTPTimer();
+            btn.disabled=false;
+            btn.innerHTML='ارسال مجدد';
+        }
+    },1000);
+}
+
+function clearOTPTimer(){
+    if(otpTimer){clearInterval(otpTimer);otpTimer=null;}
+}
+
+function resendOTP(){
+    showToast('کد جدید ارسال شد','info');
+    startOTPTimer();
+    document.getElementById('btn-resend').innerHTML='ارسال مجدد (<span id="otp-timer">۶۰</span>)';
+}
+
+function showForgotModal(){
+    const modal=document.getElementById('forgot-modal');
+    const content=document.getElementById('forgot-content');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(()=>{content.style.transform='scale(1)';content.style.opacity='1';},10);
+}
+
+function closeForgotModal(){
+    const modal=document.getElementById('forgot-modal');
+    const content=document.getElementById('forgot-content');
+    content.style.transform='scale(.95)';content.style.opacity='0';
+    setTimeout(()=>{modal.classList.add('hidden');modal.classList.remove('flex');},300);
+}
+
+function handleForgot(){
+    const phone=document.getElementById('forgot-phone').value.trim();
+    if(!phone||phone.length!==11||!phone.startsWith('09')){
+        showError('err-forgot-phone');
+        return;
+    }
+    showToast('لینک بازیابی ارسال شد','success');
+    closeForgotModal();
+}
+
+function fillDemo(phone,pass){
+    document.getElementById('login-phone').value=phone;
+    document.getElementById('login-password').value=pass;
+    document.getElementById('login-remember').checked=true;
+    showToast('اطلاعات نمونه پر شد','info');
+}
+
+function socialLogin(provider){
+    showToast(`در حال اتصال به ${provider==='google'?'گوگل':'اپل'}...`,'info');
+    setTimeout(()=>{
+        showToast('ورود با موفقیت انجام شد!','success');
+        setTimeout(()=>window.location.href='index.html',1000);
+    },1500);
+}
+
+// Close forgot modal on backdrop click
+document.getElementById('forgot-modal').addEventListener('click',e=>{
+    if(e.target===document.getElementById('forgot-modal'))closeForgotModal();
+});
+
+// Reveal animation on load
+document.addEventListener('DOMContentLoaded',()=>{
+    document.querySelectorAll('.reveal').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('revealed'),i*100);
+    });
+});
+</script>
+</body>
+</html>

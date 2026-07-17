@@ -1,0 +1,651 @@
+/* ================================================================
+   RESET & BASE
+   ================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: #FAF6F0;
+    color: #1a1a1a;
+    overflow-x: hidden;
+}
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #FAF6F0;
+}
+::-webkit-scrollbar-thumb {
+    background: #0F4C5C;
+    border-radius: 10px;
+}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.site-header {
+    transition: all 0.4s ease;
+}
+.site-header.scrolled {
+    background: rgba(7, 59, 76, 0.97) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ================================================================
+   HERO SECTION
+   ================================================================ */
+.hero-bg {
+    animation: kenburns 25s ease-in-out infinite;
+}
+
+@keyframes kenburns {
+    0%, 100% {
+        transform: scale(1.05) translate(0, 0);
+    }
+    50% {
+        transform: scale(1.15) translate(-1.5%, -1%);
+    }
+}
+
+.hero-gradient {
+    background: linear-gradient(
+        135deg,
+        rgba(232, 115, 74, 0.85) 0%,
+        rgba(140, 50, 160, 0.8) 50%,
+        rgba(7, 59, 76, 0.9) 100%
+    );
+}
+
+/* ================================================================
+   WAVES
+   ================================================================ */
+.wave-wrap {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+.wave-wrap svg {
+    width: 200%;
+    min-width: 1400px;
+}
+
+.wave1 svg {
+    animation: waveMove 7s linear infinite;
+}
+.wave2 svg {
+    animation: waveMove 11s linear infinite reverse;
+}
+.wave3 svg {
+    animation: waveMove 9s linear infinite;
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ================================================================
+   BUBBLES
+   ================================================================ */
+.bubble {
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    animation: bubbleRise linear infinite;
+}
+
+@keyframes bubbleRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.3);
+        opacity: 0;
+    }
+}
+
+/* ================================================================
+   COUNTDOWN
+   ================================================================ */
+.countdown-num {
+    background: rgba(7, 59, 76, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ================================================================
+   TIMELINE
+   ================================================================ */
+.timeline-line {
+    background: repeating-linear-gradient(
+        90deg,
+        #C9A15C,
+        #C9A15C 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    height: 3px;
+}
+
+.timeline-dot {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #E8734A, #C9A15C);
+    box-shadow: 0 4px 15px rgba(232, 115, 74, 0.4);
+}
+
+/* ================================================================
+   PRODUCT CARDS
+   ================================================================ */
+.fish-card {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.fish-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(7, 59, 76, 0.15);
+}
+.fish-card:hover .fish-img {
+    transform: rotate(-3deg) scale(1.08);
+}
+
+.fish-img {
+    transition: transform 0.5s ease;
+}
+
+.freshness-badge {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+}
+
+/* ================================================================
+   ACCESSORY CARDS
+   ================================================================ */
+.accessory-card {
+    transition: all 0.4s ease;
+    background: linear-gradient(
+        145deg,
+        rgba(201, 161, 92, 0.1),
+        rgba(7, 59, 76, 0.3)
+    );
+    border: 1px solid rgba(201, 161, 92, 0.2);
+}
+.accessory-card:hover {
+    border-color: rgba(201, 161, 92, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ================================================================
+   TRUST CARDS
+   ================================================================ */
+.trust-card {
+    transition: all 0.3s ease;
+}
+.trust-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(7, 59, 76, 0.1);
+}
+
+/* ================================================================
+   REVIEW CARDS
+   ================================================================ */
+.review-card {
+    transition: all 0.3s ease;
+}
+.review-card:hover {
+    transform: scale(1.02);
+}
+
+/* ================================================================
+   REVEAL ANIMATIONS
+   ================================================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s !important; }
+.reveal-delay-2 { transition-delay: 0.2s !important; }
+.reveal-delay-3 { transition-delay: 0.3s !important; }
+.reveal-delay-4 { transition-delay: 0.4s !important; }
+.reveal-delay-5 { transition-delay: 0.5s !important; }
+
+/* ================================================================
+   CART PANEL
+   ================================================================ */
+.cart-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.cart-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.cart-panel {
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.cart-overlay.active .cart-panel {
+    transform: translateX(0);
+}
+
+/* ================================================================
+   MOBILE MENU
+   ================================================================ */
+.mobile-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.mobile-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-panel {
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.mobile-overlay.active .mobile-panel {
+    transform: translateX(0);
+}
+
+/* ================================================================
+   TOAST NOTIFICATIONS
+   ================================================================ */
+.toast-enter {
+    animation: toastIn 0.4s ease forwards;
+}
+.toast-exit {
+    animation: toastOut 0.3s ease forwards;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+}
+
+/* ================================================================
+   FLYING FISH ANIMATION
+   ================================================================ */
+.flying-fish {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 28px;
+}
+
+/* ================================================================
+   ROUTE DOTS
+   ================================================================ */
+.route-dot {
+    position: relative;
+}
+.route-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0.4;
+    animation: routePing 2s ease-out infinite;
+}
+
+@keyframes routePing {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* ================================================================
+   SCROLLABLE SLIDERS
+   ================================================================ */
+.slider-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+.slider-scroll::-webkit-scrollbar {
+    height: 4px;
+}
+.slider-scroll::-webkit-scrollbar-thumb {
+    background: #E8734A;
+    border-radius: 10px;
+}
+.slider-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ================================================================
+   SCROLL TO TOP
+   ================================================================ */
+.scroll-top {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.scroll-top.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ================================================================
+   TEMP BADGE
+   ================================================================ */
+.temp-badge {
+    background: linear-gradient(135deg, #0ea5e9, #073B4C);
+}
+
+/* ================================================================
+   ADD TO CART BUTTONS
+   ================================================================ */
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #073B4C, #0F4C5C);
+    transition: all 0.3s ease;
+}
+.add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #E8734A, #D4602E);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(232, 115, 74, 0.35);
+}
+.add-to-cart-btn:active {
+    transform: scale(0.97);
+}
+
+.add-acc-btn {
+    background: linear-gradient(135deg, #C9A15C, #B08D3E);
+    transition: all 0.3s ease;
+}
+.add-acc-btn:hover {
+    background: linear-gradient(135deg, #D4B87A, #C9A15C);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(201, 161, 92, 0.4);
+}
+.add-acc-btn:active {
+    transform: scale(0.97);
+}
+
+/* ================================================================
+   CHECKOUT OVERLAY
+   ================================================================ */
+.full-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: #FAF6F0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+}
+.full-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.full-overlay.active .full-content {
+    animation: slideUp 0.4s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================================================
+   CHECKOUT FORM ELEMENTS
+   ================================================================ */
+.checkout-input {
+    width: 100%;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'Vazirmatn', sans-serif;
+    background: #fff;
+    transition: all 0.2s ease;
+    outline: none;
+    color: #1a1a1a;
+}
+.checkout-input:focus {
+    border-color: #0F4C5C;
+    box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.1);
+}
+.checkout-input::placeholder {
+    color: #9ca3af;
+}
+.checkout-input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.error-msg {
+    color: #ef4444;
+    font-size: 11px;
+    margin-top: 4px;
+    display: none;
+}
+.error-msg.show {
+    display: block;
+}
+
+/* ================================================================
+   RADIO CARDS
+   ================================================================ */
+.radio-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+.radio-card:hover {
+    border-color: #C9A15C;
+    background: #fffbf5;
+}
+.radio-card.selected {
+    border-color: #0F4C5C;
+    background: #f0f7f9;
+    box-shadow: 0 2px 12px rgba(15, 76, 92, 0.1);
+}
+
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    transition: all 0.2s ease;
+    position: relative;
+    flex-shrink: 0;
+}
+.radio-card.selected .radio-circle {
+    border-color: #0F4C5C;
+}
+.radio-card.selected .radio-circle::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: #0F4C5C;
+}
+
+/* ================================================================
+   PAYMENT SUMMARY
+   ================================================================ */
+.summary-sticky {
+    position: sticky;
+    top: 90px;
+}
+
+.pay-btn {
+    background: linear-gradient(135deg, #E8734A, #D4602E);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(232, 115, 74, 0.3);
+}
+.pay-btn:hover {
+    box-shadow: 0 6px 25px rgba(232, 115, 74, 0.45);
+    transform: translateY(-1px);
+}
+.pay-btn:active {
+    transform: translateY(0);
+}
+
+/* ================================================================
+   TOGGLE SECTIONS (Discount & Order Details)
+   ================================================================ */
+.discount-toggle {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.discount-toggle.open {
+    max-height: 200px;
+}
+
+.order-details-toggle {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+.order-details-toggle.open {
+    max-height: 600px;
+}
+
+/* ================================================================
+   STEP INDICATOR
+   ================================================================ */
+.step-indicator .step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.step-indicator .step-dot.active {
+    background: #0F4C5C;
+    color: #fff;
+}
+.step-indicator .step-dot.done {
+    background: #22c55e;
+    color: #fff;
+}
+.step-indicator .step-dot.pending {
+    background: #e5e7eb;
+    color: #9ca3af;
+}
+
+.step-indicator .step-line {
+    height: 2px;
+    flex: 1;
+    background: #e5e7eb;
+    transition: background 0.3s ease;
+}
+.step-indicator .step-line.done {
+    background: #22c55e;
+}
+
+/* ================================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================================ */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    .timeline-desktop {
+        display: none !important;
+    }
+    .timeline-mobile {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .timeline-mobile {
+        display: none !important;
+    }
+}
+
+/* ================================================================
+   PRODUCT DETAIL MODAL
+   ================================================================ */
+#product-detail-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+#product-detail-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+#product-detail-overlay.active #product-detail-panel {
+    transform: scale(1);
+    opacity: 1;
+}

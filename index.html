@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خلیج تازه | تازه‌ترین ماهی‌های خلیج فارس از بندرعباس</title>
+
+    <!-- ============================================================ -->
+    <!-- FONTS & LIBRARIES -->
+    <!-- ============================================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- ============================================================ -->
+    <!-- TAILWIND CONFIG -->
+    <!-- ============================================================ -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: '#E8734A',
+                        'coral-dark': '#D4602E',
+                        'teal-dark': '#0F4C5C',
+                        'teal-mid': '#1A6B7F',
+                        gold: '#C9A15C',
+                        'gold-light': '#D4B87A',
+                        sand: '#FAF6F0',
+                        'sand-dark': '#EDE7DB',
+                        'deep-blue': '#073B4C',
+                        'deep-blue-light': '#0A4F66'
+                    },
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- ============================================================ -->
+    <!-- STYLES -->
+    <!-- ============================================================ -->
+    <link rel="stylesheet" href="style.css">
+
+    <base target="_blank">
+<base target="_blank">
+</head>
+
+<body class="font-vazir">
+
+    <!-- ============================================================ -->
+    <!-- HEADER -->
+    <!-- ============================================================ -->
+    <header class="site-header fixed top-0 right-0 left-0 z-50 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+
+                <!-- Logo & Mobile Menu Toggle -->
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2 -mr-1 hover:text-coral transition-colors">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <a href="#" class="flex items-center gap-2 text-white">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-coral to-gold flex items-center justify-center">
+                            <i class="fa-solid fa-fish text-white text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-lg md:text-xl font-bold block leading-tight">خلیج تازه</span>
+                            <span class="text-[10px] md:text-xs text-white/70 block">بندرعباس · خلیج فارس</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-white/90 text-sm font-medium">
+                    <a href="#products" class="hover:text-coral transition-colors">ماهی تازه</a>
+                    <a href="#accessories" class="hover:text-coral transition-colors">اکسسوری دریایی</a>
+                    <a href="#about" class="hover:text-coral transition-colors">درباره ما</a>
+                    <a href="#contact" class="hover:text-coral transition-colors">تماس</a>
+                </nav>
+
+                <!-- Profile & Cart Buttons -->
+                <div class="flex items-center gap-1">
+                    <a href="auth.html" class="relative text-white hover:text-coral transition-colors p-2">
+                        <i class="fa-solid fa-user text-xl"></i>
+                    </a>
+                    <button onclick="openCart()" class="relative text-white hover:text-coral transition-colors p-2">
+                        <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        <span id="cart-count" class="absolute -top-0.5 -left-0.5 w-5 h-5 bg-coral text-white text-[10px] font-bold rounded-full flex items-center justify-center hidden">۰</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================================ -->
+    <section class="relative h-screen min-h-[600px] overflow-hidden">
+
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/b239502332a537631ca4d042f3c32eb9f17893fa.jpg" alt="" class="hero-bg w-full h-full object-cover">
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div class="hero-gradient absolute inset-0"></div>
+
+        <!-- Bubbles -->
+        <div id="bubbles" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+
+            <div class="mb-4">
+                <span class="inline-block bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm px-4 py-2 rounded-full border border-white/20">
+                    <i class="fa-solid fa-location-dot ml-1 text-coral"></i>مستقیم از بندرعباس به سراسر ایران
+                </span>
+            </div>
+
+            <h1 class="hero-title text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6" style="text-shadow:0 4px 20px rgba(0,0,0,.3)">
+                امروز صید شد،<br><span class="text-gold">فردا سر سفره شما</span>
+            </h1>
+
+            <p class="text-white/85 text-sm md:text-lg max-w-2xl mb-8 leading-relaxed">
+                تازه‌ترین ماهی‌های خلیج فارس با بسته‌بندی یخی اختصاصی و ضمانت بازگشت وجه
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="#products" class="bg-coral hover:bg-coral-dark text-white px-8 py-3.5 rounded-xl font-bold text-sm md:text-base transition-all hover:shadow-lg hover:shadow-coral/30">
+                    <i class="fa-solid fa-fish ml-2"></i>خرید ماهی تازه
+                </a>
+                <a href="#accessories" class="bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-bold text-sm md:text-base border border-white/30 transition-all">
+                    <i class="fa-solid fa-gem ml-2"></i>اکسسوری دریایی
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex items-center gap-6 md:gap-10 mt-10 text-white/80 text-xs md:text-sm">
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-black text-white">+۱۲۰۰</div>
+                    <div>سفارش ماهانه</div>
+                </div>
+                <div class="w-px h-10 bg-white/30"></div>
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-black text-white">۳۱</div>
+                    <div>استان تحت پوشش</div>
+                </div>
+                <div class="w-px h-10 bg-white/30"></div>
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-black text-white">٪۹۸</div>
+                    <div>رضایت مشتری</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Waves -->
+        <div class="wave-wrap wave1" style="opacity:.5">
+            <svg viewBox="0 0 2880 120" preserveAspectRatio="none" style="height:60px">
+                <path d="M0,60 C240,110 480,10 720,60 C960,110 1200,10 1440,60 C1680,110 1920,10 2160,60 C2400,110 2640,10 2880,60 L2880,120 L0,120 Z" fill="rgba(7,59,76,.5)"/>
+            </svg>
+        </div>
+        <div class="wave-wrap wave2" style="opacity:.3;bottom:-5px">
+            <svg viewBox="0 0 2880 120" preserveAspectRatio="none" style="height:50px">
+                <path d="M0,50 C360,100 720,0 1080,50 C1440,100 1800,0 2160,50 C2520,100 2880,0 2880,50 L2880,120 L0,120 Z" fill="rgba(7,59,76,.7)"/>
+            </svg>
+        </div>
+        <div class="wave-wrap wave3" style="bottom:-8px">
+            <svg viewBox="0 0 2880 120" preserveAspectRatio="none" style="height:45px">
+                <path d="M0,70 C180,30 360,90 540,50 C720,10 900,80 1080,50 C1260,20 1440,80 1620,50 C1800,20 1980,80 2160,50 C2340,20 2520,80 2700,50 C2880,20 2880,50 2880,50 L2880,120 L0,120 Z" fill="#FAF6F0"/>
+            </svg>
+        </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- COUNTDOWN SECTION -->
+    <!-- ============================================================ -->
+    <section class="relative -mt-1 bg-sand py-6 md:py-8 z-10">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="bg-deep-blue rounded-2xl p-5 md:p-8 text-white relative overflow-hidden">
+                <div class="relative z-10">
+
+                    <div class="flex items-center justify-center gap-2 mb-3">
+                        <i class="fa-solid fa-snowflake text-sky-300 text-lg animate-pulse"></i>
+                        <span class="text-sm md:text-base font-medium text-white/90">زمان باقی‌مانده جهت ارسال امروز</span>
+                        <i class="fa-solid fa-truck-fast text-coral text-lg"></i>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-3 md:gap-5">
+                        <div class="countdown-num rounded-xl px-4 py-2 md:px-6 md:py-3 min-w-[60px] md:min-w-[80px]">
+                            <div id="cd-hours" class="text-2xl md:text-4xl font-black">۰۰</div>
+                            <div class="text-[10px] md:text-xs text-white/60 mt-1">ساعت</div>
+                        </div>
+                        <span class="text-2xl font-bold text-coral animate-pulse">:</span>
+                        <div class="countdown-num rounded-xl px-4 py-2 md:px-6 md:py-3 min-w-[60px] md:min-w-[80px]">
+                            <div id="cd-minutes" class="text-2xl md:text-4xl font-black">۰۰</div>
+                            <div class="text-[10px] md:text-xs text-white/60 mt-1">دقیقه</div>
+                        </div>
+                        <span class="text-2xl font-bold text-coral animate-pulse">:</span>
+                        <div class="countdown-num rounded-xl px-4 py-2 md:px-6 md:py-3 min-w-[60px] md:min-w-[80px]">
+                            <div id="cd-seconds" class="text-2xl md:text-4xl font-black">۰۰</div>
+                            <div class="text-[10px] md:text-xs text-white/60 mt-1">ثانیه</div>
+                        </div>
+                    </div>
+
+                    <p id="countdown-msg" class="text-xs md:text-sm text-white/50 mt-3 hidden">
+                        ارسال امروز پایان یافت — سفارش‌ها فردا ارسال می‌شوند
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TIMELINE SECTION -->
+    <!-- ============================================================ -->
+    <section class="py-12 md:py-20 bg-sand">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <div class="text-center mb-12 reveal">
+                <span class="text-coral text-sm font-bold">مسیر تازگی</span>
+                <h2 class="text-2xl md:text-4xl font-black text-deep-blue mt-2">از دریا تا درب خانه شما</h2>
+            </div>
+
+            <!-- Desktop Timeline -->
+            <div class="timeline-desktop flex items-center justify-between relative reveal">
+                <div class="absolute top-1/2 left-0 right-0 -translate-y-1/2 timeline-line"></div>
+
+                <div class="relative z-10 text-center">
+                    <div class="timeline-dot rounded-full mx-auto mb-3 flex items-center justify-center text-white text-lg"><i class="fa-solid fa-anchor"></i></div>
+                    <div class="font-bold text-deep-blue text-sm">صید در خلیج فارس</div>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="timeline-dot rounded-full mx-auto mb-3 flex items-center justify-center text-white text-lg"><i class="fa-solid fa-snowflake"></i></div>
+                    <div class="font-bold text-deep-blue text-sm">بسته‌بندی یخی</div>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="timeline-dot rounded-full mx-auto mb-3 flex items-center justify-center text-white text-lg"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="font-bold text-deep-blue text-sm">ارسال سریع</div>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="timeline-dot rounded-full mx-auto mb-3 flex items-center justify-center text-white text-lg"><i class="fa-solid fa-house-chimney"></i></div>
+                    <div class="font-bold text-deep-blue text-sm">تحویل درب منزل</div>
+                </div>
+            </div>
+
+            <!-- Mobile Timeline -->
+            <div class="timeline-mobile flex-col gap-4 reveal">
+                <div class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm">
+                    <div class="timeline-dot rounded-full flex-shrink-0 flex items-center justify-center text-white"><i class="fa-solid fa-anchor"></i></div>
+                    <div><div class="font-bold text-deep-blue text-sm">صید در خلیج فارس</div></div>
+                </div>
+                <div class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm">
+                    <div class="timeline-dot rounded-full flex-shrink-0 flex items-center justify-center text-white"><i class="fa-solid fa-snowflake"></i></div>
+                    <div><div class="font-bold text-deep-blue text-sm">بسته‌بندی یخی</div></div>
+                </div>
+                <div class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm">
+                    <div class="timeline-dot rounded-full flex-shrink-0 flex items-center justify-center text-white"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div><div class="font-bold text-deep-blue text-sm">ارسال سریع</div></div>
+                </div>
+                <div class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm">
+                    <div class="timeline-dot rounded-full flex-shrink-0 flex items-center justify-center text-white"><i class="fa-solid fa-house-chimney"></i></div>
+                    <div><div class="font-bold text-deep-blue text-sm">تحویل درب منزل</div></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- PRODUCTS SECTION -->
+    <!-- ============================================================ -->
+    <section id="products" class="py-16 md:py-24 bg-sand">
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex items-end justify-between mb-10 reveal">
+                <div>
+                    <span class="text-coral text-sm font-bold">فروشگاه</span>
+                    <h2 class="text-2xl md:text-4xl font-black text-deep-blue mt-1">ماهی‌های تازه خلیج فارس</h2>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex gap-2 mb-8 overflow-x-auto pb-2 slider-scroll reveal">
+                <button class="filter-btn active flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-deep-blue text-white transition-all" data-filter="all">همه</button>
+                <button class="filter-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-600 hover:bg-deep-blue hover:text-white transition-all border border-gray-200" data-filter="fresh">تازه</button>
+                <button class="filter-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-600 hover:bg-deep-blue hover:text-white transition-all border border-gray-200" data-filter="frozen">منجمد</button>
+                <button class="filter-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-600 hover:bg-deep-blue hover:text-white transition-all border border-gray-200" data-filter="shrimp">میگو</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TRUST SECTION -->
+    <!-- ============================================================ -->
+    <section class="py-16 md:py-20 bg-deep-blue relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+
+            <div class="text-center mb-12 reveal">
+                <span class="text-gold text-sm font-bold">اعتماد شما</span>
+                <h2 class="text-2xl md:text-4xl font-black text-white mt-2">چرا به ما اعتماد کنید؟</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+                <div class="trust-card bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 text-center border border-white/10 reveal reveal-delay-1">
+                    <div class="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-shield-halved text-green-400 text-xl"></i></div>
+                    <div class="text-white font-bold text-sm mb-1">گواهی بهداشت</div>
+                </div>
+                <div class="trust-card bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 text-center border border-white/10 reveal reveal-delay-2">
+                    <div class="w-14 h-14 rounded-full bg-sky-500/20 flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-snowflake text-sky-400 text-xl"></i></div>
+                    <div class="text-white font-bold text-sm mb-1">بسته‌بندی یخی</div>
+                </div>
+                <div class="trust-card bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 text-center border border-white/10 reveal reveal-delay-3">
+                    <div class="w-14 h-14 rounded-full bg-coral/20 flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-rotate-left text-coral text-xl"></i></div>
+                    <div class="text-white font-bold text-sm mb-1">ضمانت بازگشت</div>
+                </div>
+                <div class="trust-card bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 text-center border border-white/10 reveal reveal-delay-4">
+                    <div class="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-location-crosshairs text-purple-400 text-xl"></i></div>
+                    <div class="text-white font-bold text-sm mb-1">رهگیری زنده</div>
+                </div>
+                <div class="trust-card bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 text-center border border-white/10 col-span-2 md:col-span-1 reveal reveal-delay-5">
+                    <div class="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-temperature-low text-gold text-xl"></i></div>
+                    <div class="text-white font-bold text-sm mb-1">مانیتورینگ دما</div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-10 reveal">
+                <div class="bg-gradient-to-r from-coral to-gold text-white px-8 py-4 rounded-2xl font-black text-base md:text-lg flex items-center gap-3 shadow-lg shadow-coral/20">
+                    <i class="fa-solid fa-certificate text-2xl"></i>تضمین تازگی ۱۰۰٪ یا بازگشت وجه
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACCESSORIES SECTION -->
+    <!-- ============================================================ -->
+    <section id="accessories" class="py-16 md:py-24 bg-deep-blue relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-deep-blue via-deep-blue-light to-deep-blue"></div>
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+
+            <div class="text-center mb-12 reveal">
+                <span class="text-gold text-sm font-bold">مجموعه لوکس</span>
+                <h2 class="text-2xl md:text-4xl font-black text-white mt-2">اکسسوری و زیورآلات دریایی</h2>
+            </div>
+
+            <div class="flex justify-center gap-2 mb-10 flex-wrap reveal">
+                <button class="acc-tab active px-5 py-2 rounded-full text-xs font-bold bg-gold text-deep-blue transition-all" data-cat="all">همه</button>
+                <button class="acc-tab px-5 py-2 rounded-full text-xs font-bold bg-white/10 text-white/70 hover:bg-gold hover:text-deep-blue transition-all border border-white/10" data-cat="shell">صدف</button>
+                <button class="acc-tab px-5 py-2 rounded-full text-xs font-bold bg-white/10 text-white/70 hover:bg-gold hover:text-deep-blue transition-all border border-white/10" data-cat="pearl">مروارید</button>
+                <button class="acc-tab px-5 py-2 rounded-full text-xs font-bold bg-white/10 text-white/70 hover:bg-gold hover:text-deep-blue transition-all border border-white/10" data-cat="stone">سنگ دریایی</button>
+            </div>
+
+            <div id="accessories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ABOUT SECTION -->
+    <!-- ============================================================ -->
+    <section id="about" class="py-16 md:py-24 bg-sand-dark">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+
+                <div class="reveal">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl">
+                        <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/569c573e420f20fa214ae2d80f7a8722a9006072.jpg" alt="" class="w-full h-[300px] md:h-[450px] object-cover">
+                        <div class="absolute bottom-0 right-0 left-0 bg-gradient-to-t from-deep-blue/80 to-transparent p-6">
+                            <div class="text-white text-sm font-bold"><i class="fa-solid fa-map-marker-alt ml-1 text-coral"></i>بندر صید ماهی بندرعباس</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal reveal-delay-2">
+                    <span class="text-coral text-sm font-bold">داستان ما</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-deep-blue mt-2 mb-4 leading-tight">سه نسل، یک عشق:<br>دریای خلیج فارس</h2>
+                    <p class="text-gray-600 text-sm leading-7 mb-4">خلیج تازه از قلب بندرعباس شروع شد. پدربزرگ ما صیاد بود، پدرمان ماهی‌فروش بازار قدیمی بندرعباس.</p>
+                    <p class="text-gray-600 text-sm leading-7 mb-6">هر روز صبح زود، ماهی‌های تازه را مستقیم از لنج‌های صیادی تحویل می‌گیریم و با کامیون‌های سردخانه‌دار می‌فرستیم.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CONTACT SECTION -->
+    <!-- ============================================================ -->
+    <section id="contact" class="py-16 md:py-20 bg-sand">
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+            <span class="text-coral text-sm font-bold">سوالی دارید؟</span>
+            <h2 class="text-2xl md:text-3xl font-black text-deep-blue mt-2 mb-4">پشتیبانی آنلاین</h2>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                <a href="tel:+987611234567" class="bg-deep-blue hover:bg-teal-dark text-white px-8 py-3.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i>۰۷۶-۱۲۳۴۵۶۷
+                </a>
+                <button onclick="showToast('چت آنلاین به زودی فعال می‌شود','info')" class="bg-coral hover:bg-coral-dark text-white px-8 py-3.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-comments"></i>چت آنلاین
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================================ -->
+    <footer class="bg-deep-blue text-white pt-16 pb-8">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-coral to-gold flex items-center justify-center"><i class="fa-solid fa-fish text-white"></i></div>
+                        <span class="text-lg font-black">خلیج تازه</span>
+                    </div>
+                    <p class="text-white/50 text-xs leading-6 mb-4">تازه‌ترین ماهی‌های خلیج فارس با ارسال یخی به سراسر ایران.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-gold">دسترسی سریع</h4>
+                    <ul class="space-y-2 text-white/50 text-xs">
+                        <li><a href="#products" class="hover:text-coral">ماهی تازه</a></li>
+                        <li><a href="#accessories" class="hover:text-coral">اکسسوری دریایی</a></li>
+                        <li><a href="#about" class="hover:text-coral">درباره ما</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-gold">محصولات</h4>
+                    <ul class="space-y-2 text-white/50 text-xs">
+                        <li><a href="#" class="hover:text-coral">ماهی سفید</a></li>
+                        <li><a href="#" class="hover:text-coral">میگو پرلود</a></li>
+                        <li><a href="#" class="hover:text-coral">شاه‌ماهی</a></li>
+                        <li><a href="#" class="hover:text-coral">هامور خلیجی</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm mb-4 text-gold">تماس با ما</h4>
+                    <ul class="space-y-3 text-white/50 text-xs">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-coral"></i>بندرعباس، مجتمع دریایی خلیج</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-coral"></i>۰۷۶-۱۲۳۴۵۶۷</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-coral"></i>info@khalijtaze.ir</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-6 text-center text-white/30 text-xs">
+                © ۱۴۰۳ خلیج تازه — تمامی حقوق محفوظ است
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- CART PANEL -->
+    <!-- ============================================================ -->
+    <div id="cart-overlay" class="cart-overlay fixed inset-0 z-[60] bg-black/50">
+        <div class="cart-panel absolute top-0 right-0 w-full max-w-md h-full bg-sand shadow-2xl flex flex-col">
+
+            <div class="flex items-center justify-between p-5 border-b border-gray-200">
+                <h3 class="font-black text-deep-blue text-lg"><i class="fa-solid fa-basket-shopping ml-2 text-coral"></i>سبد خرید</h3>
+                <button onclick="closeCart()" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center p-5 text-gray-400">
+                <i class="fa-solid fa-fish text-5xl mb-4 text-gray-200"></i>
+                <p class="text-sm">سبد خرید شما خالی است</p>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto p-5 hidden"></div>
+
+            <div id="cart-footer" class="hidden border-t border-gray-200 p-5 bg-white">
+                <div class="flex items-center justify-between mb-2 text-sm">
+                    <span class="text-gray-500">قیمت کالاها:</span>
+                    <span id="cart-subtotal" class="font-bold text-deep-blue">۰ تومان</span>
+                </div>
+                <div class="flex items-center justify-between mb-4 text-sm">
+                    <span class="text-gray-500">هزینه ارسال یخی:</span>
+                    <span class="font-bold text-teal-dark text-xs">محاسبه در مرحله بعد</span>
+                </div>
+                <button onclick="goToCheckout()" class="w-full pay-btn text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                    ادامه فرایند خرید <i class="fa-solid fa-arrow-left text-xs"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CHECKOUT OVERLAY -->
+    <!-- ============================================================ -->
+    <div id="checkout-overlay" class="full-overlay">
+        <div class="full-content min-h-screen">
+
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-100 sticky top-0 z-10">
+                <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+                    <button onclick="backToCart()" class="flex items-center gap-2 text-deep-blue text-sm font-bold hover:text-coral transition-colors">
+                        <i class="fa-solid fa-arrow-right"></i>بازگشت به سبد
+                    </button>
+                    <span class="text-deep-blue font-bold text-sm">آدرس و ارسال</span>
+                    <div class="w-20"></div>
+                </div>
+                <div class="max-w-3xl mx-auto px-4 pb-4">
+                    <div class="step-indicator flex items-center gap-0">
+                        <div class="step-dot done"><i class="fa-solid fa-check text-[10px]"></i></div>
+                        <div class="step-line done"></div>
+                        <div class="step-dot active">۲</div>
+                        <div class="step-line"></div>
+                        <div class="step-dot pending">۳</div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-gray-400 mt-1 px-1">
+                        <span>سبد خرید</span><span>آدرس و ارسال</span><span>پرداخت</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="max-w-3xl mx-auto px-4 py-8">
+
+                <!-- Address Form -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-6">
+                    <h3 class="font-black text-deep-blue text-lg mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-coral"></i>اطلاعات ارسال
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">نام <span class="text-coral">*</span></label>
+                            <input id="chk-fname" type="text" class="checkout-input" placeholder="مثلاً: علی">
+                            <div class="error-msg" id="err-fname">نام خود را وارد کنید</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">نام خانوادگی <span class="text-coral">*</span></label>
+                            <input id="chk-lname" type="text" class="checkout-input" placeholder="مثلاً: محمدی">
+                            <div class="error-msg" id="err-lname">نام خانوادگی را وارد کنید</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">شماره موبایل <span class="text-coral">*</span></label>
+                            <input id="chk-phone" type="tel" class="checkout-input" placeholder="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11">
+                            <div class="error-msg" id="err-phone">شماره موبایل ۱۱ رقم وارد کنید</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">کد پستی <span class="text-coral">*</span></label>
+                            <input id="chk-postal" type="text" class="checkout-input" placeholder="مثلاً: ۱۲۳۴۵۶۷۸۹۰" maxlength="10">
+                            <div class="error-msg" id="err-postal">کد پستی ۱۰ رقم وارد کنید</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">استان <span class="text-coral">*</span></label>
+                            <select id="chk-province" class="checkout-input cursor-pointer" onchange="onProvinceChange()">
+                                <option value="">انتخاب استان...</option>
+                            </select>
+                            <div class="error-msg" id="err-province">استان را انتخاب کنید</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">شهر <span class="text-coral">*</span></label>
+                            <select id="chk-city" class="checkout-input cursor-pointer" onchange="updateShippingInfo()" disabled>
+                                <option value="">ابتدا استان را انتخاب کنید</option>
+                            </select>
+                            <div class="error-msg" id="err-city">شهر را انتخاب کنید</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">آدرس کامل <span class="text-coral">*</span></label>
+                        <textarea id="chk-address" class="checkout-input" rows="3" placeholder="خیابان، کوچه، پلاک، واحد..."></textarea>
+                        <div class="error-msg" id="err-address">آدرس کامل را وارد کنید</div>
+                    </div>
+                </div>
+
+                <!-- Shipping Info -->
+                <div id="shipping-info-card" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-6 hidden">
+                    <h3 class="font-black text-deep-blue text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-truck-fast text-teal-dark"></i>اطلاعات ارسال
+                    </h3>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex-1 bg-sky-50 rounded-xl p-4 flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center"><i class="fa-solid fa-snowflake text-sky-500 text-lg"></i></div>
+                            <div><div class="text-xs text-gray-500">روش ارسال</div><div class="font-bold text-deep-blue text-sm">ارسال یخی سردخانه‌دار</div></div>
+                        </div>
+                        <div class="flex-1 bg-green-50 rounded-xl p-4 flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"><i class="fa-solid fa-clock text-green-500 text-lg"></i></div>
+                            <div><div class="text-xs text-gray-500">زمان تحویل</div><div id="delivery-time" class="font-bold text-deep-blue text-sm">—</div></div>
+                        </div>
+                        <div class="flex-1 bg-orange-50 rounded-xl p-4 flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center"><i class="fa-solid fa-coins text-coral text-lg"></i></div>
+                            <div><div class="text-xs text-gray-500">هزینه ارسال</div><div id="shipping-cost" class="font-bold text-deep-blue text-sm">—</div></div>
+                        </div>
+                    </div>
+                    <div id="free-shipping-msg" class="hidden mt-4 bg-green-50 border border-green-200 rounded-xl p-3 text-center text-sm text-green-700 font-bold">
+                        <i class="fa-solid fa-gift ml-1"></i> ارسال رایگان! (سفارش بالای ۱,۰۰۰,۰۰۰ تومان)
+                    </div>
+                </div>
+
+                <!-- Price Summary -->
+                <div id="checkout-price-card" class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8 hidden">
+                    <div class="flex items-center justify-between py-2 text-sm">
+                        <span class="text-gray-500">قیمت کالاها</span>
+                        <span id="chk-subtotal" class="font-bold text-deep-blue">۰ تومان</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2 text-sm border-t border-gray-100">
+                        <span class="text-gray-500">هزینه ارسال یخی</span>
+                        <span id="chk-shipping" class="font-bold text-teal-dark">۰ تومان</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 mt-2 border-t-2 border-deep-blue/10">
+                        <span class="font-black text-deep-blue">مبلغ قابل پرداخت</span>
+                        <span id="chk-total" class="font-black text-coral text-lg">۰ تومان</span>
+                    </div>
+                </div>
+
+                <button onclick="goToPayment()" class="w-full pay-btn text-white py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 mb-8">
+                    ادامه به پرداخت <i class="fa-solid fa-arrow-left text-sm"></i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAYMENT OVERLAY -->
+    <!-- ============================================================ -->
+    <div id="payment-overlay" class="full-overlay">
+        <div class="full-content min-h-screen bg-gray-50">
+
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-100 sticky top-0 z-10">
+                <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+                    <button onclick="backToCheckout()" class="flex items-center gap-2 text-deep-blue text-sm font-bold hover:text-coral transition-colors">
+                        <i class="fa-solid fa-arrow-right"></i>بازگشت
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-coral to-gold flex items-center justify-center"><i class="fa-solid fa-fish text-white text-xs"></i></div>
+                        <span class="font-black text-deep-blue">خلیج تازه</span>
+                    </div>
+                    <div class="w-20"></div>
+                </div>
+                <div class="max-w-5xl mx-auto px-4 pb-4">
+                    <div class="step-indicator flex items-center gap-0">
+                        <div class="step-dot done"><i class="fa-solid fa-check text-[10px]"></i></div>
+                        <div class="step-line done"></div>
+                        <div class="step-dot done"><i class="fa-solid fa-check text-[10px]"></i></div>
+                        <div class="step-line done"></div>
+                        <div class="step-dot active">۳</div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-gray-400 mt-1 px-1">
+                        <span>سبد خرید</span><span>آدرس و ارسال</span><span>پرداخت</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="max-w-5xl mx-auto px-4 py-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Left Column -->
+                    <div class="lg:col-span-2 space-y-6">
+
+                        <!-- Payment Methods -->
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <h3 class="font-black text-deep-blue text-lg mb-5 flex items-center gap-2">
+                                <i class="fa-solid fa-credit-card text-teal-dark"></i>انتخاب روش پرداخت
+                            </h3>
+                            <div class="space-y-3" id="payment-methods">
+                                <div class="radio-card selected flex items-center gap-4" data-method="online" onclick="selectPayment(this)">
+                                    <div class="radio-circle"></div>
+                                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-globe text-blue-500"></i></div>
+                                    <div class="flex-1"><div class="font-bold text-deep-blue text-sm">پرداخت اینترنتی</div><div class="text-xs text-gray-400 mt-0.5">درگاه بانکی امن</div></div>
+                                    <span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold">پیشنهادی</span>
+                                </div>
+                                <div class="radio-card flex items-center gap-4" data-method="wallet" onclick="selectPayment(this)">
+                                    <div class="radio-circle"></div>
+                                    <div class="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-wallet text-gold"></i></div>
+                                    <div class="flex-1"><div class="font-bold text-deep-blue text-sm">کیف پول</div><div class="text-xs text-gray-400 mt-0.5">پرداخت از موجودی</div></div>
+                                </div>
+                                <div class="radio-card flex items-center gap-4" data-method="credit" onclick="selectPayment(this)">
+                                    <div class="radio-circle"></div>
+                                    <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-hand-holding-dollar text-purple-500"></i></div>
+                                    <div class="flex-1"><div class="font-bold text-deep-blue text-sm">پرداخت اعتباری</div><div class="text-xs text-gray-400 mt-0.5">اقساط ۳ تا ۶ ماهه</div></div>
+                                </div>
+                                <div class="radio-card flex items-center gap-4" data-method="gift" onclick="selectPayment(this)">
+                                    <div class="radio-circle"></div>
+                                    <div class="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gift text-pink-500"></i></div>
+                                    <div class="flex-1"><div class="font-bold text-deep-blue text-sm">کارت هدیه</div><div class="text-xs text-gray-400 mt-0.5">پرداخت با کارت هدیه</div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Discount -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <button onclick="toggleDiscount()" class="w-full p-5 flex items-center justify-between text-right hover:bg-gray-50 transition-colors">
+                                <span class="font-bold text-deep-blue text-sm flex items-center gap-2"><i class="fa-solid fa-tag text-coral"></i>کد تخفیف و کارت هدیه</span>
+                                <i id="discount-arrow" class="fa-solid fa-chevron-down text-gray-400 text-xs transition-transform duration-300"></i>
+                            </button>
+                            <div id="discount-body" class="discount-toggle">
+                                <div class="px-5 pb-5 space-y-3">
+                                    <div class="flex gap-2">
+                                        <input id="discount-input" type="text" class="checkout-input flex-1" placeholder="کد تخفیف...">
+                                        <button onclick="applyDiscount()" class="bg-deep-blue hover:bg-teal-dark text-white px-5 rounded-xl text-sm font-bold transition-colors whitespace-nowrap">اعمال</button>
+                                    </div>
+                                    <div id="discount-result" class="hidden text-sm p-3 rounded-xl"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Details -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <button onclick="toggleOrderDetails()" class="w-full p-5 flex items-center justify-between text-right hover:bg-gray-50 transition-colors">
+                                <span class="font-bold text-deep-blue text-sm flex items-center gap-2"><i class="fa-solid fa-box text-teal-dark"></i>جزئیات سفارش</span>
+                                <i id="details-arrow" class="fa-solid fa-chevron-down text-gray-400 text-xs transition-transform duration-300"></i>
+                            </button>
+                            <div id="order-details-body" class="order-details-toggle">
+                                <div class="px-5 pb-5">
+                                    <div id="pay-order-items" class="space-y-3"></div>
+                                    <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 gap-3 text-xs">
+                                        <div class="bg-sky-50 rounded-xl p-3"><span class="text-gray-500 block mb-1">روش ارسال</span><span class="font-bold text-deep-blue">یخی سردخانه‌دار</span></div>
+                                        <div class="bg-green-50 rounded-xl p-3"><span class="text-gray-500 block mb-1">زمان تحویل</span><span id="pay-delivery-time" class="font-bold text-deep-blue">—</span></div>
+                                        <div class="bg-orange-50 rounded-xl p-3 col-span-2"><span class="text-gray-500 block mb-1">آدرس</span><span id="pay-address" class="font-bold text-deep-blue leading-relaxed">—</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column - Summary -->
+                    <div class="lg:col-span-1">
+                        <div class="summary-sticky bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <h3 class="font-black text-deep-blue text-sm mb-5 flex items-center gap-2">
+                                <i class="fa-solid fa-receipt text-coral"></i>خلاصه سفارش
+                            </h3>
+
+                            <div id="pay-summary-items" class="space-y-3 mb-5 max-h-60 overflow-y-auto"></div>
+
+                            <div class="space-y-3 text-sm border-t border-gray-100 pt-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">قیمت کالاها</span>
+                                    <span id="pay-subtotal" class="font-bold text-deep-blue">۰ تومان</span>
+                                </div>
+                                <div id="pay-discount-row" class="hidden flex justify-between">
+                                    <span class="text-green-600">تخفیف</span>
+                                    <span id="pay-discount-amount" class="font-bold text-green-600">۰ تومان</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">هزینه ارسال</span>
+                                    <span id="pay-shipping" class="font-bold text-teal-dark">۰ تومان</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t-2 border-deep-blue/10">
+                                <span class="font-black text-deep-blue">مبلغ قابل پرداخت</span>
+                                <span id="pay-total" class="font-black text-coral text-xl">۰ تومان</span>
+                            </div>
+
+                            <button onclick="finalizePayment()" class="w-full pay-btn text-white py-4 rounded-xl font-bold text-base mt-5 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-lock text-sm"></i> پرداخت
+                            </button>
+
+                            <div class="flex items-center justify-center gap-4 mt-4 text-[10px] text-gray-400">
+                                <span><i class="fa-solid fa-shield-halved ml-1"></i>پرداخت امن</span>
+                                <span><i class="fa-solid fa-rotate-left ml-1"></i>ضمانت بازگشت</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MOBILE MENU -->
+    <!-- ============================================================ -->
+    <div id="mobile-overlay" class="mobile-overlay fixed inset-0 z-[60] bg-black/50">
+        <div class="mobile-panel absolute top-0 right-0 w-72 h-full bg-deep-blue shadow-2xl flex flex-col">
+
+            <div class="flex items-center justify-between p-5 border-b border-white/10">
+                <span class="text-white font-bold">منو</span>
+                <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <nav class="flex-1 p-5 flex flex-col gap-1">
+                <a href="#products" onclick="toggleMobileMenu()" class="text-white/80 hover:text-coral hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-fish w-5"></i>ماهی تازه
+                </a>
+                <a href="#accessories" onclick="toggleMobileMenu()" class="text-white/80 hover:text-coral hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-gem w-5"></i>اکسسوری دریایی
+                </a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-white/80 hover:text-coral hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-users w-5"></i>درباره ما
+                </a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-white/80 hover:text-coral hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-headset w-5"></i>تماس و پشتیبانی
+                </a>
+            </nav>
+
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TOAST CONTAINER -->
+    <!-- ============================================================ -->
+    <div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 items-center pointer-events-none"></div>
+
+    <!-- ============================================================ -->
+    <!-- SCROLL TO TOP -->
+    <!-- ============================================================ -->
+    <button id="scroll-top" class="scroll-top fixed bottom-6 right-6 z-50 w-12 h-12 bg-deep-blue text-white rounded-full shadow-lg flex items-center justify-center hover:bg-coral transition-all" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================================ -->
+    
+<!-- Login Check Script -->
+<script>
+(function(){
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem('khalijtaze_user');
+    if (!isLoggedIn && !window.location.href.includes('auth.html')) {
+        // Save intended page for redirect after login
+        localStorage.setItem('khalijtaze_redirect', window.location.href);
+        window.location.href = 'auth.html';
+    }
+})();
+</script>
+
+    <script src="script.js"></script>
+
+
+    <!-- ============================================================ -->
+    <!-- PRODUCT DETAIL MODAL -->
+    <!-- ============================================================ -->
+    <div id="product-detail-overlay" class="fixed inset-0 z-[70] bg-black/60 hidden items-center justify-center p-4">
+        <div id="product-detail-panel" class="bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <div class="relative">
+                <!-- Close Button -->
+                <button onclick="closeProductDetail()" class="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-gray-500 hover:text-coral hover:bg-white transition-all shadow-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <!-- Image Section -->
+                    <div class="relative h-64 md:h-auto md:min-h-[500px]">
+                        <img id="pd-img" src="" alt="" class="w-full h-full object-cover">
+                        <div id="pd-freshness-badge" class="absolute top-4 right-4"></div>
+                        <div class="absolute bottom-0 right-0 left-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                            <div id="pd-price" class="text-white font-black text-2xl"></div>
+                        </div>
+                    </div>
+
+                    <!-- Info Section -->
+                    <div class="p-6 md:p-8 flex flex-col">
+                        <div class="mb-1">
+                            <span id="pd-category" class="text-coral text-xs font-bold"></span>
+                        </div>
+                        <h2 id="pd-name" class="text-deep-blue font-black text-xl md:text-2xl mb-4"></h2>
+
+                        <!-- Quick Info -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <div class="bg-sand rounded-xl px-4 py-2 flex items-center gap-2">
+                                <i class="fa-solid fa-weight-hanging text-coral text-sm"></i>
+                                <span id="pd-weight" class="text-sm font-bold text-deep-blue"></span>
+                            </div>
+                            <div class="bg-sand rounded-xl px-4 py-2 flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-day text-coral text-sm"></i>
+                                <span id="pd-catch" class="text-sm font-bold text-deep-blue"></span>
+                            </div>
+                            <div class="bg-sand rounded-xl px-4 py-2 flex items-center gap-2">
+                                <i class="fa-solid fa-snowflake text-sky-500 text-sm"></i>
+                                <span class="text-sm font-bold text-deep-blue">ارسال یخی</span>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-6">
+                            <h3 class="font-bold text-deep-blue text-sm mb-2">توضیحات محصول</h3>
+                            <p id="pd-desc" class="text-gray-500 text-sm leading-7"></p>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="mb-6">
+                            <h3 class="font-bold text-deep-blue text-sm mb-3">ویژگی‌ها</h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="flex items-center gap-2 text-xs text-gray-600">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>تازه و سالم</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-xs text-gray-600">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>بسته‌بندی یخی</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-xs text-gray-600">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>ضمانت بازگشت</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-xs text-gray-600">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>ارسال به سراسر ایران</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nutrition (for fish) -->
+                        <div id="pd-nutrition" class="mb-6 hidden">
+                            <h3 class="font-bold text-deep-blue text-sm mb-3">ارزش غذایی (در ۱۰۰ گرم)</h3>
+                            <div class="grid grid-cols-4 gap-2">
+                                <div class="bg-sky-50 rounded-xl p-3 text-center">
+                                    <div class="text-sky-600 font-black text-lg">۲۲g</div>
+                                    <div class="text-[10px] text-gray-500">پروتئین</div>
+                                </div>
+                                <div class="bg-green-50 rounded-xl p-3 text-center">
+                                    <div class="text-green-600 font-black text-lg">۱.۵g</div>
+                                    <div class="text-[10px] text-gray-500">چربی</div>
+                                </div>
+                                <div class="bg-orange-50 rounded-xl p-3 text-center">
+                                    <div class="text-orange-600 font-black text-lg">۰g</div>
+                                    <div class="text-[10px] text-gray-500">کربوهیدرات</div>
+                                </div>
+                                <div class="bg-purple-50 rounded-xl p-3 text-center">
+                                    <div class="text-purple-600 font-black text-lg">۱۰۰</div>
+                                    <div class="text-[10px] text-gray-500">کالری</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity & Add to Cart -->
+                        <div class="mt-auto pt-4 border-t border-gray-100">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="flex items-center gap-2 bg-gray-100 rounded-xl">
+                                    <button onclick="changePDQty(-1)" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-coral transition-colors">
+                                        <i class="fa-solid fa-minus text-sm"></i>
+                                    </button>
+                                    <span id="pd-qty" class="text-sm font-bold text-deep-blue w-6 text-center">۱</span>
+                                    <button onclick="changePDQty(1)" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-coral transition-colors">
+                                        <i class="fa-solid fa-plus text-sm"></i>
+                                    </button>
+                                </div>
+                                <button id="pd-add-btn" onclick="addPDToCart()" class="add-to-cart-btn flex-1 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    <span>افزودن به سبد</span>
+                                </button>
+                            </div>
+                            <a id="pd-detail-link" href="#" class="block text-center text-coral text-xs font-bold hover:underline">
+                                <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>مشاهده صفحه اختصاصی محصول
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

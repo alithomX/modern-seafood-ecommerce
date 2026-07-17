@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات محصول — خلیج تازه</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config={theme:{extend:{colors:{coral:'#E8734A','coral-dark':'#D4602E','teal-dark':'#0F4C5C','teal-mid':'#1A6B7F',gold:'#C9A15C','gold-light':'#D4B87A',sand:'#FAF6F0','sand-dark':'#EDE7DB','deep-blue':'#073B4C','deep-blue-light':'#0A4F66'},fontFamily:{vazir:['Vazirmatn','sans-serif']}}}}}
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Vazirmatn',sans-serif;background:#FAF6F0;color:#1a1a1a;overflow-x:hidden}
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#FAF6F0}::-webkit-scrollbar-thumb{background:#0F4C5C;border-radius:10px}
+        .add-to-cart-btn{background:linear-gradient(135deg,#073B4C,#0F4C5C);transition:all .3s ease}
+        .add-to-cart-btn:hover{background:linear-gradient(135deg,#E8734A,#D4602E);transform:scale(1.03);box-shadow:0 6px 20px rgba(232,115,74,.35)}
+        .add-to-cart-btn:active{transform:scale(.97)}
+        .freshness-badge{animation:pulse-glow 2s ease-in-out infinite}
+        @keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}
+        .toast-enter{animation:toastIn .4s ease forwards}
+        .toast-exit{animation:toastOut .3s ease forwards}
+        @keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes toastOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-10px) scale(.95)}}
+        .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+        .reveal.revealed{opacity:1;transform:translateY(0)}
+
+        /* Hero parallax */
+        #hero-img {
+            transition: transform 0.1s linear;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Sticky cart bar animation */
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="font-vazir">
+
+<!-- Login Check -->
+<script>
+(function(){
+    const isLoggedIn = localStorage.getItem('khalijtaze_user');
+    if (!isLoggedIn) {
+        localStorage.setItem('khalijtaze_redirect', window.location.href);
+        window.location.href = 'auth.html';
+    }
+})();
+</script>
+
+<!-- Fixed Header -->
+<header class="fixed top-0 right-0 left-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 text-white drop-shadow-lg">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-coral to-gold flex items-center justify-center shadow-lg">
+                <i class="fa-solid fa-fish text-white text-sm"></i>
+            </div>
+            <span class="font-bold text-sm">خلیج تازه</span>
+        </a>
+        <div class="flex items-center gap-1">
+            <a href="auth.html" class="text-white/90 hover:text-coral transition-colors p-2 drop-shadow-lg">
+                <i class="fa-solid fa-user text-lg"></i>
+            </a>
+            <a href="index.html#products" class="text-white/90 hover:text-coral transition-colors p-2 drop-shadow-lg">
+                <i class="fa-solid fa-basket-shopping text-lg"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Full-Screen Hero Section -->
+<div id="hero-section" class="fixed inset-0 z-0">
+    <img id="hero-img" src="" alt="" class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+</div>
+
+<!-- Scrollable Content Overlay -->
+<main class="relative z-10 min-h-screen">
+    <!-- Spacer for hero visibility -->
+    <div class="h-screen flex flex-col justify-end pb-12 px-4 md:px-8">
+        <div class="max-w-4xl">
+            <div id="hero-badge" class="mb-4"></div>
+            <h1 id="hero-title" class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4 drop-shadow-2xl"></h1>
+            <div id="hero-price" class="text-3xl md:text-4xl font-black text-gold drop-shadow-lg mb-6"></div>
+            <div class="flex flex-wrap gap-3" id="hero-tags"></div>
+        </div>
+
+        <!-- Scroll hint -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 animate-bounce">
+            <span class="text-xs">اسکرول کنید</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <!-- Details Section -->
+    <div class="bg-sand rounded-t-[2.5rem] shadow-2xl">
+        <div id="product-container" class="max-w-4xl mx-auto px-4 md:px-8 py-12">
+            <!-- Content loaded dynamically -->
+            <div class="flex items-center justify-center h-96">
+                <i class="fa-solid fa-circle-notch fa-spin text-coral text-3xl"></i>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="max-w-6xl mx-auto px-4 md:px-8 pb-16">
+            <h2 class="text-deep-blue font-black text-xl mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-coral"></i>
+                محصولات مشابه
+            </h2>
+            <div id="related-products" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+    </div>
+</main>
+
+
+
+<!-- Toast -->
+<div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 items-center pointer-events-none"></div>
+
+<script>
+// ===== Product Data =====
+const fishProducts=[
+    {id:1,name:'میگو پرلود بندرعباس',price:580000,weight:'۵۰۰-۸۰۰ گرم',catchDate:'امروز',freshness:'fresh',type:'shrimp',img:'https://kimi-web-img.moonshot.cn/img/www.fresh-cornish-fish.co.uk/7adb9e31e41d10da32f6cd6dd197fa46ce4a16a4.jpg',desc:'میگو پرلود بندرعباس یکی از مرغوب‌ترین میگوهای خلیج فارس است. این میگوها به صورت تازه و با بسته‌بندی یخی ارسال می‌شوند.'},
+    {id:2,name:'قزل‌آلای تازه رودخانه‌ای',price:320000,weight:'۱-۱.۵ کیلوگرم',catchDate:'امروز',freshness:'fresh',type:'fresh',img:'https://kimi-web-img.moonshot.cn/img/thewrightbrothers.co.uk/071e629584369054608dcf9a5a405bef78450c36.jpg',desc:'قزل‌آلای تازه با گوشت نرم و طعم دلنشین، یکی از محبوب‌ترین ماهی‌ها برای کباب و سرخ کردن است.'},
+    {id:3,name:'ماهی سفید خلیج فارس',price:450000,weight:'۸۰۰-۱.۲ کیلوگرم',catchDate:'دیروز',freshness:'fresh',type:'fresh',img:'https://kimi-web-img.moonshot.cn/img/www.ninjafood.com.sg/7d95261219945c7c050a53cdd81a42b1596c81a0.jpg',desc:'ماهی سفید خلیج فارس با گوشت لطیف و کم استخوان، انتخابی عالی برای غذاهای دریایی است.'},
+    {id:4,name:'حلوا ماهی (سرخو)',price:680000,weight:'۶۰۰-۹۰۰ گرم',catchDate:'امروز',freshness:'fresh',type:'fresh',img:'https://kimi-web-img.moonshot.cn/img/pickfreshfish.com/c6f61e5c424dd021e26de5d8764eaf0443adba69.webp',desc:'حلوا ماهی یا سرخو با گوشت قرمز و طعم منحصربه‌فرد، از گران‌بهاترین ماهی‌های خلیج فارس است.'},
+    {id:5,name:'شاه‌ماهی صید امروز',price:390000,weight:'۳۰۰-۵۰۰ گرم',catchDate:'امروز',freshness:'fresh',type:'fresh',img:'https://kimi-web-img.moonshot.cn/img/cityfish.com/2194b1e4559d2e3f542983fc097bba002d10886b.jpg',desc:'شاه‌ماهی تازه صید شده با گوشت سفید و طعم ملایم، مناسب برای انواع پخت و پز.'},
+    {id:6,name:'ماهی هامور خلیج فارس',price:750000,weight:'۱.۵-۲.۵ کیلوگرم',catchDate:'دیروز',freshness:'fresh',type:'fresh',img:'https://kimi-web-img.moonshot.cn/img/katiesseafood.com/7d757bea6b34fd559a3937b064991ed35ade1398.jpg',desc:'هامور خلیجی با گوشت سفید و لطیف، یکی از گران‌بهاترین و محبوب‌ترین ماهی‌های جنوب ایران است.'},
+    {id:7,name:'میگو منجمد ۴۰-۵۰',price:420000,weight:'۱ کیلوگرم',catchDate:'منجمد',freshness:'frozen',type:'shrimp',img:'https://kimi-web-img.moonshot.cn/img/www.ulmapackaging.com/03601b3a9cb441cf7e13df6ab7e2fbadf5510bcf.jpeg',desc:'میگو منجمد با سایز ۴۰-۵۰ در بسته‌بندی یک کیلویی، مناسب برای مصرف خانگی و رستوران‌ها.'},
+    {id:8,name:'ماهی کفال منجمد',price:280000,weight:'۸۰۰ گرم',catchDate:'منجمد',freshness:'frozen',type:'frozen',img:'https://kimi-web-img.moonshot.cn/img/intershellseafood.com/32d0f1bffcd7e7026f9a02d23252b4289cf90bff.png',desc:'ماهی کفال منجمد با قیمت مناسب و کیفیت بالا، گزینه‌ای اقتصادی برای سفره‌های ایرانی.'},
+    {id:9,name:'فیل‌ماهی تازه',price:520000,weight:'۲-۳ کیلوگرم',catchDate:'امروز',freshness:'fresh',type:'fresh',img:'https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/24fbb95ac9e3a8344f734d4989b6d1432911fbb7.jpg',desc:'فیل‌ماهی تازه با گوشت سفید و لطیف، مناسب برای کباب و سرخ کردن.'},
+];
+const accessories=[
+    {id:101,name:'دستبند صدف طبیعی',price:350000,cat:'shell',img:'https://kimi-web-img.moonshot.cn/img/kinnstudio.com/9d4822e3e289826e9357725f3081c5728710a372.jpg',desc:'دستبند صدف طبیعی با طراحی منحصربه‌فرد و کیفیت بالا.'},
+    {id:102,name:'گردنبند مروارید خلیجی',price:890000,cat:'pearl',img:'https://kimi-web-img.moonshot.cn/img/chandranipearls.in/e006a259ed849c0781cdc993561813b195539a7d.jpg',desc:'گردنبند مروارید اصل خلیج فارس با طراحی لوکس و شیک.'},
+    {id:103,name:'انگشتر سنگ مرجان',price:450000,cat:'stone',img:'https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/3bf58b97f22d1d035709eadf93d8d0f079a500c1.jpg',desc:'انگشتر سنگ مرجان با رنگ قرمز طبیعی و طراحی زیبا.'},
+    {id:104,name:'ست زیورآلات صدفی',price:1200000,cat:'shell',img:'https://kimi-web-img.moonshot.cn/img/www.crunchyfashion.com/d3fa8696e035d30443c7e0c6a2ffd1959f72d0a3.jpg',desc:'ست کامل زیورآلات صدفی شامل دستبند، گردنبند و گوشواره.'},
+    {id:105,name:'گوشواره مروارید قطره‌ای',price:560000,cat:'pearl',img:'https://kimi-web-img.moonshot.cn/img/www.linjer.co/dba39d2bc3fb3bd386e1af5435954dd5cd2b36e5.jpg',desc:'گوشواره مروارید قطره‌ای با طراحی ظریف و شیک.'},
+    {id:106,name:'دستبند سنگ دریایی',price:280000,cat:'stone',img:'https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/3bf58b97f22d1d035709eadf93d8d0f079a500c1.jpg',desc:'دستبند سنگ دریایی با سنگ‌های طبیعی و رنگارنگ.'},
+    {id:107,name:'پلاک صدف مرواریدی',price:380000,cat:'shell',img:'https://kimi-web-img.moonshot.cn/img/cdn11.bigcommerce.com/cbdca67c7f11f876275c1945a7b117d15ba4f8db.jpg',desc:'پلاک صدف با مروارید طبیعی، هدیه‌ای خاص و به یادماندنی.'},
+    {id:108,name:'نیم‌ست مروارید اصل',price:1500000,cat:'pearl',img:'https://kimi-web-img.moonshot.cn/img/cdn.salla.sa/d2040b2d552d5f70ddf7482fdbd5fce5c2014c7f.jpg',desc:'نیم‌ست مروارید اصل با گواهی اصالت و جعبه هدیه لوکس.'},
+];
+
+function toFa(n){const d=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];return String(n).replace(/\d/g,c=>d[c]);}
+function formatPrice(p){return toFa(p.toLocaleString('en-US'))+' تومان';}
+
+function showToast(msg,type='success'){
+    const c=document.getElementById('toast-container'),t=document.createElement('div');
+    const co={success:'bg-deep-blue',info:'bg-gray-700',error:'bg-red-600'};
+    const ic={success:'fa-check-circle text-green-400',info:'fa-info-circle text-sky-400',error:'fa-exclamation-circle text-red-300'};
+    t.className=`toast-enter ${co[type]} text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm pointer-events-auto`;
+    t.innerHTML=`<i class="fa-solid ${ic[type]}"></i><span>${msg}</span>`;
+    c.appendChild(t);
+    setTimeout(()=>{t.classList.remove('toast-enter');t.classList.add('toast-exit');},2500);
+    setTimeout(()=>t.remove(),2900);
+}
+
+// Get product ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const productId = parseInt(urlParams.get('id'));
+const productType = urlParams.get('type') || 'fish';
+
+const allProducts = [...fishProducts, ...accessories];
+const product = allProducts.find(p => p.id === productId);
+
+if (!product) {
+    document.getElementById('hero-section').innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-white">
+            <i class="fa-solid fa-fish text-6xl text-white/20 mb-4"></i>
+            <h2 class="font-black text-xl mb-2">محصول یافت نشد</h2>
+            <p class="text-white/60 text-sm mb-6">محصول مورد نظر شما در فروشگاه موجود نیست</p>
+            <a href="index.html" class="bg-coral text-white px-6 py-3 rounded-xl font-bold text-sm">بازگشت به فروشگاه</a>
+        </div>
+    `;
+    document.getElementById('product-container').innerHTML = '';
+    document.getElementById('related-products').innerHTML = '';
+} else {
+    const isFish = product.id < 100;
+    const category = isFish ? (product.type === 'shrimp' ? 'میگو' : product.freshness === 'frozen' ? 'منجمد' : 'ماهی تازه') : 
+        (product.cat === 'shell' ? 'زیورآلات صدفی' : product.cat === 'pearl' ? 'مروارید' : 'سنگ دریایی');
+
+    const freshnessBadge = isFish ? 
+        `<span class="freshness-badge inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold ${product.catchDate === 'امروز' ? 'bg-green-500 text-white' : product.catchDate === 'منجمد' ? 'bg-sky-500 text-white' : 'bg-yellow-500 text-white'}"><i class="fa-solid fa-${product.catchDate === 'امروز' ? 'check-circle' : product.catchDate === 'منجمد' ? 'snowflake' : 'clock'}"></i>${product.catchDate === 'امروز' ? 'صید امروز' : product.catchDate === 'منجمد' ? 'منجمد' : 'صید دیروز'}</span>` :
+        `<span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold bg-gold text-deep-blue"><i class="fa-solid fa-gem"></i>اکسسوری دریایی</span>`;
+
+    // Set hero image
+    document.getElementById('hero-img').src = product.img;
+    document.getElementById('hero-img').alt = product.name;
+
+    // Set hero content
+    document.getElementById('hero-badge').innerHTML = `<span class="text-white/80 text-sm font-medium bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full">${category}</span>`;
+    document.getElementById('hero-title').textContent = product.name;
+    document.getElementById('hero-price').textContent = formatPrice(product.price);
+
+    const tagsHtml = isFish ? `
+        <div class="bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <i class="fa-solid fa-weight-hanging text-gold"></i>${product.weight}
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <i class="fa-solid fa-calendar-day text-gold"></i>${product.catchDate}
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <i class="fa-solid fa-snowflake text-sky-300"></i>ارسال یخی
+        </div>
+    ` : `
+        <div class="bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <i class="fa-solid fa-gem text-gold"></i>${category}
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <i class="fa-solid fa-snowflake text-sky-300"></i>ارسال یخی
+        </div>
+    `;
+    document.getElementById('hero-tags').innerHTML = tagsHtml;
+
+    const nutritionSection = isFish ? `
+        <div class="mb-10 reveal">
+            <h3 class="font-black text-deep-blue text-lg mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-coral"></i>ارزش غذایی (در ۱۰۰ گرم)
+            </h3>
+            <div class="grid grid-cols-4 gap-3">
+                <div class="bg-sky-50 rounded-2xl p-4 text-center">
+                    <div class="text-sky-600 font-black text-2xl">۲۲g</div>
+                    <div class="text-xs text-gray-500 mt-1">پروتئین</div>
+                </div>
+                <div class="bg-green-50 rounded-2xl p-4 text-center">
+                    <div class="text-green-600 font-black text-2xl">۱.۵g</div>
+                    <div class="text-xs text-gray-500 mt-1">چربی</div>
+                </div>
+                <div class="bg-orange-50 rounded-2xl p-4 text-center">
+                    <div class="text-orange-600 font-black text-2xl">۰g</div>
+                    <div class="text-xs text-gray-500 mt-1">کربوهیدرات</div>
+                </div>
+                <div class="bg-purple-50 rounded-2xl p-4 text-center">
+                    <div class="text-purple-600 font-black text-2xl">۱۰۰</div>
+                    <div class="text-xs text-gray-500 mt-1">کالری</div>
+                </div>
+            </div>
+        </div>
+    ` : '';
+
+    document.getElementById('product-container').innerHTML = `
+        <div class="reveal">
+            <!-- Freshness Badge -->
+            <div class="mb-6">${freshnessBadge}</div>
+
+            <!-- Description -->
+            <div class="mb-10">
+                <h3 class="font-black text-deep-blue text-lg mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-align-right text-coral"></i>توضیحات محصول
+                </h3>
+                <p class="text-gray-600 text-sm leading-8">${product.desc || product.name + ' یکی از بهترین و باکیفیت‌ترین محصولات خلیج تازه است. این محصول با دقت و کیفیت بالا انتخاب و بسته‌بندی می‌شود.'}</p>
+            </div>
+
+            <!-- Features -->
+            <div class="mb-10">
+                <h3 class="font-black text-deep-blue text-lg mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-coral"></i>ویژگی‌ها و ضمانت‌ها
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-green-500 text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-deep-blue text-sm">تازه و سالم</div>
+                            <div class="text-xs text-gray-400">ضمانت تازگی ۱۰۰٪</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-snowflake text-sky-500 text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-deep-blue text-sm">بسته‌بندی یخی</div>
+                            <div class="text-xs text-gray-400">حفظ تازگی تا درب منزل</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-rotate-left text-coral text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-deep-blue text-sm">ضمانت بازگشت</div>
+                            <div class="text-xs text-gray-400">بازگشت وجه در صورت نارضایتی</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-truck-fast text-gold text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-deep-blue text-sm">ارسال به سراسر ایران</div>
+                            <div class="text-xs text-gray-400">۳۱ استان تحت پوشش</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            ${nutritionSection}
+
+            <!-- Add to Cart -->
+            <div class="sticky bottom-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 md:p-5">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 bg-gray-100 rounded-xl">
+                        <button onclick="changeQty(-1)" class="w-12 h-12 flex items-center justify-center text-gray-500 hover:text-coral transition-colors rounded-xl hover:bg-gray-200">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span id="qty" class="text-lg font-black text-deep-blue w-8 text-center">۱</span>
+                        <button onclick="changeQty(1)" class="w-12 h-12 flex items-center justify-center text-gray-500 hover:text-coral transition-colors rounded-xl hover:bg-gray-200">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1">
+                        <button onclick="addToCart()" class="add-to-cart-btn w-full text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus text-lg"></i>
+                            <span>افزودن به سبد — ${formatPrice(product.price)}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Load related products
+    const related = allProducts.filter(p => p.id !== product.id && (isFish ? p.id < 100 : p.id >= 100)).slice(0, 4);
+    document.getElementById('related-products').innerHTML = related.map(p => `
+        <a href="product-detail.html?id=${p.id}&type=${p.id < 100 ? 'fish' : 'acc'}" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
+            <div class="h-44 overflow-hidden relative">
+                <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div class="p-4">
+                <h4 class="font-bold text-deep-blue text-sm truncate mb-1">${p.name}</h4>
+                <div class="text-coral font-black text-sm">${formatPrice(p.price)}</div>
+            </div>
+        </a>
+    `).join('');
+}
+
+let qty = 1;
+function changeQty(delta) {
+    qty += delta;
+    if (qty < 1) qty = 1;
+    if (qty > 99) qty = 99;
+    document.getElementById('qty').textContent = toFa(qty);
+}
+
+function addToCart() {
+    if (!product) return;
+    // Save to localStorage cart (shared with index.html)
+    let cart = JSON.parse(localStorage.getItem('khalijtaze_cart') || '[]');
+    const existing = cart.find(c => c.id === product.id);
+    if (existing) {
+        existing.qty += qty;
+    } else {
+        cart.push({ ...product, qty: qty });
+    }
+    localStorage.setItem('khalijtaze_cart', JSON.stringify(cart));
+    showToast(`${product.name} (${toFa(qty)} عدد) به سبد اضافه شد`, 'success');
+}
+
+// Parallax effect on hero image
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const heroImg = document.getElementById('hero-img');
+    if (heroImg && scrolled < window.innerHeight) {
+        heroImg.style.transform = `translateY(${scrolled * 0.4}px) scale(1.1)`;
+    }
+});
+
+// Reveal animation on scroll
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+});
+</script>
+</body>
+</html>
